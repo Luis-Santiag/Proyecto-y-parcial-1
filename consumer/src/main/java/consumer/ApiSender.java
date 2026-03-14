@@ -13,7 +13,6 @@ public class ApiSender {
             ObjectMapper mapper = new ObjectMapper();
             ObjectNode node = (ObjectNode) mapper.readTree(json);
 
-    
             node.put("nombre", "Angel");
             node.put("carnet", "0905-24-9756");
 
@@ -26,19 +25,24 @@ public class ApiSender {
                     MediaType.parse("application/json"));
 
             Request request = new Request.Builder()
-            		.url("https://7e0d9ogwzd.execute-api.us-east-1.amazonaws.com/default/guardarTransacciones")
+                    .url("https://7e0d9ogwzd.execute-api.us-east-1.amazonaws.com/default/guardarTransacciones")
                     .post(body)
                     .build();
+            
+            try (Response response = client.newCall(request).execute()) {
 
-            Response response = client.newCall(request).execute();
+                System.out.println("Respuesta POST: " + response.code());
 
-            System.out.println("Respuesta POST: " + response.code());
 
-            return response.isSuccessful();
+                return response.isSuccessful();
+
+            }
 
         } catch (Exception e) {
 
+            System.out.println("Error enviando POST");
             e.printStackTrace();
+
             return false;
 
         }

@@ -24,6 +24,7 @@ public class ConsumerApp {
         Channel channel = connection.createChannel();
 
         channel.queueDeclare("cola_duplicados", true, false, false, null);
+        channel.queueDeclare("cola_errores", true, false, false, null);
 
         ObjectMapper mapper = new ObjectMapper();
 
