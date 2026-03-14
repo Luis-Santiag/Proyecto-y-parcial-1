@@ -15,13 +15,13 @@ Arquitectura
 El flujo del sistema es el siguiente:        
 
 API de Transacciones        
-↓        
+        ↓        
      Producer        
-↓        
+        ↓        
      RabbitMQ        
-↓        
+        ↓        
      Consumer                
-↓        
+        ↓        
 API Guardar Transacciones        
 
 El Producer obtiene un lote de transacciones desde la API.
