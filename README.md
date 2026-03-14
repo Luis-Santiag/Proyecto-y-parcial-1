@@ -17,7 +17,7 @@ El flujo del sistema es el siguiente:
 API de Transacciones        
 ↓        
      Producer        
-     ↓        
+↓        
      RabbitMQ        
 ↓        
      Consumer                
