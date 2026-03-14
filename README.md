@@ -47,9 +47,7 @@ Tecnologías
 
 Ejecución
 
--Iniciar RabbitMQ.
-
--Ejecutar el Producer para obtener y enviar transacciones a las colas.
-
--Ejecutar el Consumer para procesar los mensajes y enviarlos a la API.
+-Iniciar RabbitMQ.        
+-Ejecutar el Producer para obtener y enviar transacciones a las colas.        
+-Ejecutar el Consumer para procesar los mensajes y enviarlos a la API.        
 
