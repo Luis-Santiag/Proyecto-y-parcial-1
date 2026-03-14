@@ -39,13 +39,11 @@ Las transacciones se distribuyen en las siguientes colas:
 
 
 Tecnologías
--Java
 
--RabbitMQ
-
--OkHttp
-
--Jackson (Java library)
+-Java        
+-RabbitMQ        
+-OkHttp        
+-Jackson (Java library)        
 
 Ejecución
 
