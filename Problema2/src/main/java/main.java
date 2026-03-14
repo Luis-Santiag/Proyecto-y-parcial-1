@@ -34,7 +34,7 @@ public class main {
 
 	    public static void main(String[] args) {
 
-	        int[] nums = {7, 2, 9, 4, 9, 4};
+	        int[] nums = {7, 2, 9, 4, 1, 8};
 
 	        int[] resultado = encontrar(nums);
 
