@@ -31,7 +31,7 @@ Cada mensaje recibido se envía mediante un POST a la API de almacenamiento.
 
 Colas Utilizadas
 
-Las transacciones se distribuyen en las siguientes colas:
+Las transacciones se distribuyen en las siguientes colas:        
 -BAC        
 -BANRURAL        
 -BI        
