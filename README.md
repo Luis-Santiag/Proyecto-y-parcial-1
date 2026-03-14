@@ -11,17 +11,17 @@ Las transacciones se obtienen desde una API, se distribuyen en colas según el b
 
 El sistema está desarrollado en Java y utiliza RabbitMQ para la gestión de colas de mensajes.
 
-Arquitectura
+Arquitectura        
 El flujo del sistema es el siguiente:        
 
 API de Transacciones        
-        ↓        
+                ↓        
      Producer        
-        ↓        
+                ↓        
      RabbitMQ        
-        ↓        
+                ↓        
      Consumer                
-        ↓        
+                ↓        
 API Guardar Transacciones        
 
 El Producer obtiene un lote de transacciones desde la API.
