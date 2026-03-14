@@ -1,20 +1,31 @@
 package consumer;
 
 import com.rabbitmq.client.*;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class ConsumerApp {
 
     private static final String HOST = "localhost";
 
+    private static final Set<String> procesados = new HashSet<>();
+
     public static void main(String[] args) throws Exception {
 
-        String[] bancos = {"BAC","BANRURAL","BI","GYT",};
+        String[] bancos = {"BAC","BANRURAL","BI","GYT"};
 
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost(HOST);
 
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
+
+        channel.queueDeclare("cola_duplicados", true, false, false, null);
+
+        ObjectMapper mapper = new ObjectMapper();
 
         for (String banco : bancos) {
 
@@ -26,18 +37,41 @@ public class ConsumerApp {
 
                 String mensaje = new String(delivery.getBody());
 
-                System.out.println("Mensaje recibido: " + mensaje);
+                try {
 
-                boolean exito = ApiSender.enviarPOST(mensaje);
+                    JsonNode json = mapper.readTree(mensaje);
+                    String id = json.get("idTransaccion").asText();
 
-                if (exito) {
+                    if (procesados.contains(id)) {
 
-                    channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
-                    System.out.println("POST exitoso → ACK enviado");
+                        channel.basicPublish("", "cola_duplicados", null, mensaje.getBytes());
 
-                } else {
+                        channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
 
-                    System.out.println("Error en POST → mensaje no confirmado");
+                        System.out.println(id + " | DUPLICADA | cola_duplicados");
+
+                        return;
+                    }
+
+                    boolean exito = ApiSender.enviarPOST(mensaje);
+
+                    if (exito) {
+
+                        procesados.add(id);
+
+                        channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
+
+                        System.out.println(id + " | PROCESADA | " + banco);
+
+                    } else {
+
+                        System.out.println(id + " | ERROR_POST | " + banco);
+
+                    }
+
+                } catch (Exception e) {
+
+                    e.printStackTrace();
 
                 }
 
