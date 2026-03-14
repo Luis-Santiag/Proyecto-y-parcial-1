@@ -40,12 +40,18 @@ Las transacciones se distribuyen en las siguientes colas:
 
 Tecnologías
 -Java
+
 -RabbitMQ
+
 -OkHttp
+
 -Jackson (Java library)
 
 Ejecución
 
 -Iniciar RabbitMQ.
+
 -Ejecutar el Producer para obtener y enviar transacciones a las colas.
+
 -Ejecutar el Consumer para procesar los mensajes y enviarlos a la API.
+
