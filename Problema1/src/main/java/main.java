@@ -30,5 +30,16 @@ public class main {
 
 		        System.out.println("Puntaje total: " + resultado);
 		    }
+		    
+		    //Complejidad temporal
+		    //La complejidad es de "complejidad temporal 0(n)" indica que el tiempo de ejecucion depende del tamñano de del arreglo 
+		    
+		    
+		    //complejidad espacial
+		    //la complejidad es de "complejidad espacial 0(1)" porque uso es constante 
+		    
+		    
+		    
+		    
 
 }
